@@ -1,57 +1,51 @@
 const renderActivities = async () => {
-  const response = await fetch("/activities");
+  const response = await fetch("/gifts");
   const data = await response.json();
-
-  const mainContent = document.getElementById("main-content");
-
-  if (data) {
-    data.map((activity) => {
-      const card = document.createElement("div");
-      card.classList.add("card");
-
-      const topContainer = document.createElement("div");
-      topContainer.classList.add("top-container");
-
-      const bottomContainer = document.createElement("div");
-      bottomContainer.classList.add("bottom-container");
-
-      topContainer.style.backgroundImage = `url(${activity.image})`;
-
-      const name = document.createElement("h3");
-      name.textContent = activity.name;
-      bottomContainer.appendChild(name);
-      
-      const adrenaline_score = document.createElement("p");
-      adrenaline_score.textContent = "Price: " + activity.adrenaline_score;
-      bottomContainer.appendChild(adrenaline_score);
-
-      const description = document.createElement("p");
-      description.textContent = "Great For: " + activity.description;
-      bottomContainer.appendChild(description);
-
-      const link = document.createElement("a");
-      link.textContent = "Read More >";
-      link.setAttribute("role", "button");
-      link.href = `/activities/${activity.id}`;
-      bottomContainer.appendChild(link);
-
-      card.appendChild(topContainer);
-      card.appendChild(bottomContainer);
-      mainContent.appendChild(card);
-    });
-  } else {
-    const message = document.createElement("h2");
-    message.textContent = "No Activites Available 🥲";
-    mainContent.appendChild(message);
-  }
 };
 
-// url after the /
-const requestedURL = window.location.href.split("/").pop();
-console.log(requestedURL);
-// if not null, then 404
-if (requestedURL) {
-  window.location.href = "../404.html";
+const mainContent = document.getElementById("main-content");
+
+if (data) {
+  data.map((gift) => {
+    // create card container
+    const giftContainer = document.createElement("div");
+    giftContainer.className = "card";
+    // create top container within card
+    const topContainer = document.createElement("div");
+    topContainer.className = "top-container";
+    topContainer.style.backgroundImage = `url(${gift.image})`;
+
+    // create bottom container within card
+    const bottomContainer = document.createElement("div");
+    bottomContainer.className = "bottom-container";
+    const giftName = document.createElement("h3");
+    giftName.textContent = gift.name;
+    bottomContainer.appendChild(giftName);
+    const giftPrice = document.createElement("p");
+    giftPrice.textContent = `$${gift.price}`;
+    bottomContainer.appendChild(giftPrice);
+
+    const giftAudience = document.createElement("p");
+    giftAudience.textContent = gift.audience;
+    bottomContainer.appendChild(giftAudience);
+
+    const readMoreTag = document.createElement("a");
+    readMoreTag.textContent = "Read More > ";
+    readMoreTag.href = `/gifts/${gift.id}`;
+    readMoreTag.role = "button";
+    bottomContainer.appendChild(readMoreTag);
+
+    // append top and bottom containers to card container
+    giftContainer.appendChild(topContainer);
+    giftContainer.appendChild(bottomContainer);
+
+    // append card container to main content
+    mainContent.appendChild(giftContainer);
+  });
 } else {
-  renderGifts();
+  const message = document.createElement("h2");
+  message.textContent = "No Gifts Available 😞";
+  mainContent.appendChild(message);
 }
+
+renderActivities();

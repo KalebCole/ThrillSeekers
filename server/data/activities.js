@@ -1,4 +1,4 @@
-const adrenalineActivities = [
+const activities = [
   {
     name: "Skydiving in Interlaken",
     location: "Interlaken, Switzerland",
@@ -41,4 +41,4 @@ const adrenalineActivities = [
   },
 ];
 
-export default adrenalineActivities;
+export default activities;
