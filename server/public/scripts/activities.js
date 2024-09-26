@@ -20,18 +20,14 @@ const renderActivities = async () => {
       const name = document.createElement("h3");
       name.textContent = activity.name;
       bottomContainer.appendChild(name);
+      
+      const adrenaline_score = document.createElement("p");
+      adrenaline_score.textContent = "Price: " + activity.adrenaline_score;
+      bottomContainer.appendChild(adrenaline_score);
 
-      // TODO: change these to match the data schema
-      // adrenaline_score
-      // description
-      // location
-      // const pricePoint = document.createElement("p");
-      // pricePoint.textContent = "Price: " + activity.pricePoint;
-      // bottomContainer.appendChild(pricePoint);
-
-      // const audience = document.createElement("p");
-      // audience.textContent = "Great For: " + activity.audience;
-      // bottomContainer.appendChild(audience);
+      const description = document.createElement("p");
+      description.textContent = "Great For: " + activity.description;
+      bottomContainer.appendChild(description);
 
       const link = document.createElement("a");
       link.textContent = "Read More >";
