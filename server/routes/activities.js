@@ -20,6 +20,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/activities/:id", (req, res) => {
+  console.log("GET request received");
   res
     .status(200)
     .sendFile(path.resolve(__dirname, "../public/activities.html"));

@@ -28,11 +28,11 @@ const renderActivities = async () => {
       bottomContainer.appendChild(name);
 
       const adrenaline_score = document.createElement("p");
-      adrenaline_score.textContent = "Price: " + activity.adrenaline_score;
+      adrenaline_score.textContent = "Adrenaline Score: " + activity.adrenaline_score;
       bottomContainer.appendChild(adrenaline_score);
 
       const description = document.createElement("p");
-      description.textContent = "Great For: " + activity.description;
+      description.textContent = "Description: " + activity.description;
       bottomContainer.appendChild(description);
 
       const link = document.createElement("a");
