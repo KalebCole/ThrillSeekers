@@ -1,5 +1,4 @@
 import express from "express";
-// TODO: create a controller file that reads and writes to json and can read and write to a database
 // import { getActivities, createActivity, deleteActivity, updateActivity } from "../controllers/activities.js";
 import path from "path";
 import { fileURLToPath } from "url";
