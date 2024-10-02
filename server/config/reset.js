@@ -2,12 +2,12 @@ import { pool } from "./database.js";
 import dotenv from "./dotenv.js";
 import activities from "../data/activities.js";
 
-// used to create out Activities table and load our json data into the db
+// used to create out activities table and load our json data into the db
 const createActivitiesTable = async () => {
   const createTableQuery = `
-    DROP TABLE IF EXISTS Activities;
+    DROP TABLE IF EXISTS activities;
 
-    CREATE TABLE IF NOT EXISTS Activities (
+    CREATE TABLE IF NOT EXISTS activities (
         id SERIAL PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         location VARCHAR(255) NOT NULL,
@@ -19,9 +19,9 @@ const createActivitiesTable = async () => {
 
   try {
     const res = await pool.query(createTableQuery);
-    console.log("🎉 Activities table created successfully");
+    console.log("🎉 activities table created successfully");
   } catch (err) {
-    console.error("⚠️ error creating Activities table", err);
+    console.error("⚠️ error creating activities table", err);
   }
 };
 
@@ -30,7 +30,7 @@ const seedActivitiesTable = async () => {
 
   for (const activity of activities) {
     const checkQuery = {
-      text: "SELECT 1 FROM Activities WHERE name = $1",
+      text: "SELECT 1 FROM activities WHERE name = $1",
       values: [activity.name],
     };
 
@@ -42,7 +42,7 @@ const seedActivitiesTable = async () => {
       }
 
       const insertQuery = {
-        text: "INSERT INTO Activities (name, location, priority, image, description) VALUES ($1, $2, $3, $4, $5)",
+        text: "INSERT INTO activities (name, location, priority, image, description) VALUES ($1, $2, $3, $4, $5)",
         values: [
           activity.name,
           activity.location,

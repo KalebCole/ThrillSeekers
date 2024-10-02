@@ -1,50 +1,50 @@
 const renderActivities = async () => {
-  const response = await fetch("/gifts");
+  const response = await fetch("/activities");
   const data = await response.json();
 };
 
 const mainContent = document.getElementById("main-content");
 
 if (data) {
-  data.map((gift) => {
+  data.map((activity) => {
     // create card container
-    const giftContainer = document.createElement("div");
-    giftContainer.className = "card";
+    const activityContainer = document.createElement("div");
+    activityContainer.className = "card";
     // create top container within card
     const topContainer = document.createElement("div");
     topContainer.className = "top-container";
-    topContainer.style.backgroundImage = `url(${gift.image})`;
+    topContainer.style.backgroundImage = `url(${activity.image})`;
 
     // create bottom container within card
     const bottomContainer = document.createElement("div");
     bottomContainer.className = "bottom-container";
-    const giftName = document.createElement("h3");
-    giftName.textContent = gift.name;
-    bottomContainer.appendChild(giftName);
-    const giftPrice = document.createElement("p");
-    giftPrice.textContent = `$${gift.price}`;
-    bottomContainer.appendChild(giftPrice);
+    const activityName = document.createElement("h3");
+    activityName.textContent = activity.name;
+    bottomContainer.appendChild(activityName);
+    const activityPrice = document.createElement("p");
+    activityPrice.textContent = `$${activity.price}`;
+    bottomContainer.appendChild(activityPrice);
 
-    const giftAudience = document.createElement("p");
-    giftAudience.textContent = gift.audience;
-    bottomContainer.appendChild(giftAudience);
+    const activityAudience = document.createElement("p");
+    activityAudience.textContent = activity.audience;
+    bottomContainer.appendChild(activityAudience);
 
     const readMoreTag = document.createElement("a");
     readMoreTag.textContent = "Read More > ";
-    readMoreTag.href = `/gifts/${gift.id}`;
+    readMoreTag.href = `/activities/${activity.id}`;
     readMoreTag.role = "button";
     bottomContainer.appendChild(readMoreTag);
 
     // append top and bottom containers to card container
-    giftContainer.appendChild(topContainer);
-    giftContainer.appendChild(bottomContainer);
+    activityContainer.appendChild(topContainer);
+    activityContainer.appendChild(bottomContainer);
 
     // append card container to main content
-    mainContent.appendChild(giftContainer);
+    mainContent.appendChild(activityContainer);
   });
 } else {
   const message = document.createElement("h2");
-  message.textContent = "No Gifts Available 😞";
+  message.textContent = "No Activities Available 😞";
   mainContent.appendChild(message);
 }
 
