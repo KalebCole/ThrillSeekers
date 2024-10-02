@@ -1,4 +1,4 @@
-# WEB103 Project 1 - *Adrenaline Chasers*
+# WEB103 Project 1 - *ThrillSeekers*
 
 Submitted by: **Kaleb Cole**
 

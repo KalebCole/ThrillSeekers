@@ -7,10 +7,10 @@ const headerLeft = document.createElement("div");
 headerLeft.className = "header-left";
 
 const headerLogo = document.createElement("img");
-headerLogo.src = "/logo.webp";
+headerLogo.src = "/thrillseekers.png";
 
 const headerTitle = document.createElement("h1");
-headerTitle.textContent = "Adrenaline Chasers";
+headerTitle.textContent = "ThrillSeekers";
 
 const headerRight = document.createElement("div");
 headerRight.className = "header-right";
