@@ -31,4 +31,3 @@ headerContainer.appendChild(headerLeft);
 headerContainer.appendChild(headerRight);
 
 header.appendChild(headerContainer);
-console.log(headerContainer);
