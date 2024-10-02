@@ -4,11 +4,11 @@ const renderActivities = async () => {
     console.log("Error fetching data");
     return;
   }
-  console.log(response);
+
   const data = await response.json();
 
   const mainContent = document.getElementById("main-content");
-  console.log(data);
+
 
   if (data) {
     data.map((activity) => {
@@ -27,9 +27,9 @@ const renderActivities = async () => {
       name.textContent = activity.name;
       bottomContainer.appendChild(name);
 
-      const adrenaline_score = document.createElement("p");
-      adrenaline_score.textContent = "Adrenaline Score: " + activity.adrenaline_score;
-      bottomContainer.appendChild(adrenaline_score);
+      const priority = document.createElement("p");
+      priority.textContent = "Priority: " + activity.priority;
+      bottomContainer.appendChild(priority);
 
       const description = document.createElement("p");
       description.textContent = "Description: " + activity.description;
@@ -54,7 +54,6 @@ const renderActivities = async () => {
 
 // url after the /
 const requestedURL = window.location.href.split("/").pop();
-console.log(requestedURL);
 // if not null, then 404
 if (requestedURL) {
   window.location.href = "../404.html";
