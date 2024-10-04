@@ -1,5 +1,8 @@
 const renderActivities = async () => {
   const response = await fetch("/activities");
+  // debug
+  console.log("inside renderActivities function");
+  console.log("response: ", response);
   if (!response.ok) {
     console.log("Error fetching data");
     return;
@@ -37,7 +40,7 @@ const renderActivities = async () => {
       const link = document.createElement("a");
       link.textContent = "Read More >";
       link.setAttribute("role", "button");
-      link.href = `/activities/${activity.id}`;
+      link.href = `/actives/${activity.id}`;
       bottomContainer.appendChild(link);
 
       card.appendChild(topContainer);
@@ -51,53 +54,54 @@ const renderActivities = async () => {
   }
 };
 
-const renderActivityDetails = async (activityId) => {
-  console.log("activityId: ", activityId);
+const renderActivity = async (activityId) => {
+  console.log("in the renderActivity function");
   try {
-    const response = await fetch(`/activities/${activityId}`);
+    const response = await fetch(`/activities/${activityId}`); // call the server to get the activity with the id
 
     if (!response.ok) {
       throw new Error("Activity not found");
     }
 
     const activity = await response.json();
+    console.log(activity);
 
     const mainContent = document.getElementById("main-content");
-    mainContent.innerHTML = ""; // Clear previous content
 
-    // Create the card and add content dynamically for the single activity
     const card = document.createElement("div");
     card.classList.add("card");
 
     const topContainer = document.createElement("div");
     topContainer.classList.add("top-container");
-    topContainer.style.backgroundImage = `url(${activity.image})`;
 
     const bottomContainer = document.createElement("div");
     bottomContainer.classList.add("bottom-container");
+
+    topContainer.style.backgroundImage = `url(${activity.image})`;
 
     const name = document.createElement("h3");
     name.textContent = activity.name;
     bottomContainer.appendChild(name);
 
-    const price = document.createElement("p");
-    price.textContent = "$" + activity.price;
-    bottomContainer.appendChild(price);
-
-    const audience = document.createElement("p");
-    audience.textContent = activity.audience;
-    bottomContainer.appendChild(audience);
+    const priority = document.createElement("p");
+    priority.textContent = "Priority: " + activity.priority;
+    bottomContainer.appendChild(priority);
 
     const description = document.createElement("p");
-    description.textContent = activity.description;
+    description.textContent = "Description: " + activity.description;
     bottomContainer.appendChild(description);
+
+    const link = document.createElement("a");
+    link.textContent = "Go Back";
+    link.setAttribute("role", "button");
+    link.href = "/";
+    bottomContainer.appendChild(link);
 
     card.appendChild(topContainer);
     card.appendChild(bottomContainer);
     mainContent.appendChild(card);
   } catch (error) {
-    const mainContent = document.getElementById("main-content");
-    mainContent.innerHTML = `<h2>${error.message}</h2>`;
+    console.log(error);
   }
 };
 
@@ -105,7 +109,7 @@ const renderActivityDetails = async (activityId) => {
 const checkAndRender = () => {
   // get the url after the dns name
   const urlPath = window.location.pathname;
-  const urlSegments = urlPath.split("/").pop(); // ex. /activities/1 => ["activities", "1"]
+  const urlSegments = urlPath.split("/").filter(Boolean); // ex. /activities/1 => ["activities", "1"]
 
   console.log("inside client/public/scripts/activities.js");
 
@@ -114,20 +118,20 @@ const checkAndRender = () => {
   console.log("urlSegments: ", urlSegments);
 
   // if the url is /activities/:id, render a singular activity
-  if (urlSegments[0] === "activities" && urlSegments.length == 2) {
+  if (urlSegments[0] === "actives" && urlSegments.length == 2) {
     // debug
     console.log("rendering singular activity");
     if (!isNaN(urlSegments[1])) {
-      renderActivityDetails(requestedURL[1]);
+      renderActivity(urlSegments[1]);
     }
-  } else if (urlPath === "/activities" || urlPath === "/") {
+  } else if (urlPath === "/actives" || urlPath === "/") {
     // debug
-    console.log("rendering activities");
+    console.log("rendering activities in client side");
     renderActivities();
   } else {
     // debug
     console.log("404");
-    window.location.href = "../404.html";
+    // window.location.href = "../404.html";
   }
 };
 

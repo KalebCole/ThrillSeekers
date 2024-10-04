@@ -48,7 +48,7 @@ const renderActivities = async () => {
   }
 };
 
-const renderActivityDetails = async (activityId) => {
+const renderActivity = async (activityId) => {
   console.log("activityId: ", activityId);
   try {
     const response = await fetch(`/activities/${activityId}`);
@@ -115,7 +115,7 @@ const checkAndRender = () => {
     // debug
     console.log("rendering singular activity");
     if (!isNaN(urlSegments[1])) {
-      renderActivityDetails(requestedURL[1]);
+      renderActivity(requestedURL[1]);
     }
   } else if (urlPath === "/activities" || urlPath === "/") {
     // debug
