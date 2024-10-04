@@ -25,7 +25,7 @@
 
 .header-left h1 {
   float: right;
-  font-size: 45px;
+  font-size: 35px;
 }
 
 .header-right {
@@ -62,7 +62,7 @@ main {
 
 .card {
   width: 300px;
-  height: 400px;
+  height: 430px;
   background: transparent;
   border-style: solid;
   border-width: 3px;

@@ -63,8 +63,15 @@ const renderActivity = async (activityId) => {
       throw new Error("Activity not found");
     }
 
-    const activity = await response.json();
-    console.log(activity);
+    let activity;
+    try {
+      activity = await response.json();
+    } catch (error) {
+      console.log("error: ", error);
+    }
+
+    activity = activity[0];
+
 
     const mainContent = document.getElementById("main-content");
 
